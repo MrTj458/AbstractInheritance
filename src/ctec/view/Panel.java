@@ -16,6 +16,7 @@ public class Panel extends JPanel
 	private JLabel colorLabel;
 	private JLabel wheelsLabel;
 	private JButton nextButton;
+	private JLabel carType;
 	
 	public Panel(Controller baseController)
 	{
@@ -26,6 +27,7 @@ public class Panel extends JPanel
 		colorLabel = new JLabel("The car is: ");
 		wheelsLabel = new JLabel("The car has 4 wheels: ");
 		nextButton = new JButton("Next Car");
+		carType = new JLabel("None selected");
 		
 		setupPanel();
 		setupLayout();
@@ -40,15 +42,20 @@ public class Panel extends JPanel
 		this.add(colorLabel);
 		this.add(wheelsLabel);
 		this.add(nextButton);
+		this.add(carType);
 	}
 	
 	private void setupLayout()
 	{
-		baseLayout.putConstraint(SpringLayout.NORTH, wheelsLabel, 6, SpringLayout.SOUTH, nextButton);
 		baseLayout.putConstraint(SpringLayout.WEST, wheelsLabel, 10, SpringLayout.WEST, this);
 		baseLayout.putConstraint(SpringLayout.NORTH, colorLabel, 6, SpringLayout.SOUTH, wheelsLabel);
 		baseLayout.putConstraint(SpringLayout.WEST, colorLabel, 10, SpringLayout.WEST, this);
 		baseLayout.putConstraint(SpringLayout.NORTH, seatsLabel, 6, SpringLayout.SOUTH, colorLabel);
+		baseLayout.putConstraint(SpringLayout.SOUTH, nextButton, -6, SpringLayout.NORTH, wheelsLabel);
+		baseLayout.putConstraint(SpringLayout.EAST, nextButton, -10, SpringLayout.EAST, this);
+		baseLayout.putConstraint(SpringLayout.SOUTH, wheelsLabel, -49, SpringLayout.SOUTH, this);
+		baseLayout.putConstraint(SpringLayout.WEST, carType, 10, SpringLayout.WEST, this);
+		baseLayout.putConstraint(SpringLayout.SOUTH, carType, -6, SpringLayout.NORTH, wheelsLabel);
 		baseLayout.putConstraint(SpringLayout.WEST, seatsLabel, 0, SpringLayout.WEST, colorLabel);
 	}
 	
@@ -76,12 +83,14 @@ public class Panel extends JPanel
 	{
 		if(car.equals("jeep"))
 		{
+			carType.setText("Jeep");
 			seatsLabel.setText("Number of seats: " + Integer.toString(baseController.getJeep().getNumberOfSeats()));
 			wheelsLabel.setText("The car has 4 wheels: " + Boolean.toString(baseController.getJeep().has4Wheels()));
 			colorLabel.setText("The car is: " + baseController.getJeep().getColor());
 		}
 		else if(car.equals("mazda"))
 		{
+			carType.setText("Mazda");
 			seatsLabel.setText("Number of seats: " + Integer.toString(baseController.getMazda().getNumberOfSeats()));
 			wheelsLabel.setText("The car has 4 wheels: " + Boolean.toString(baseController.getMazda().has4Wheels()));
 			colorLabel.setText("The car is: " + baseController.getMazda().getColor());

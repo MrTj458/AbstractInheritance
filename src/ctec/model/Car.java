@@ -2,7 +2,7 @@ package ctec.model;
 
 import java.util.ArrayList;
 
-public abstract class Car
+public abstract class Car implements Death
 {
 	private int numberOfSeats;
 	private boolean has4Wheels;
