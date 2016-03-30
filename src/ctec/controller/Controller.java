@@ -14,6 +14,15 @@ public class Controller
 		jeep = new JeepWrangler();
 		mazda = new MazdaRx8();
 		frame = new Frame(this);
-		
+	}
+	
+	public JeepWrangler getJeep()
+	{
+		return jeep;
+	}
+	
+	public MazdaRx8 getMazda()
+	{
+		return mazda;
 	}
 }

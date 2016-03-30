@@ -6,6 +6,6 @@ public class MazdaRx8 extends Car
 	{
 		this.setNumberOfSeats(4);
 		this.setHas4Wheels(true);
-		this.setColor("red");
+		this.setColor("Red");
 	}
 }

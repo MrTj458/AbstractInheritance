@@ -18,7 +18,7 @@ public abstract class Car
 		this.numberOfSeats = numberOfSeats;
 	}
 
-	public boolean isHas4Wheels()
+	public boolean has4Wheels()
 	{
 		return has4Wheels;
 	}

@@ -9,6 +9,8 @@ import ctec.controller.Controller;
 public class Panel extends JPanel
 {
 	private Controller baseController;
+	private String currentCar;
+	
 	private SpringLayout baseLayout;
 	private JLabel seatsLabel;
 	private JLabel colorLabel;
@@ -18,6 +20,7 @@ public class Panel extends JPanel
 	public Panel(Controller baseController)
 	{
 		this.baseController = baseController;
+		currentCar = "mazda";
 		baseLayout = new SpringLayout();
 		seatsLabel = new JLabel("Number of seats: ");
 		colorLabel = new JLabel("The car is: ");
@@ -51,5 +54,37 @@ public class Panel extends JPanel
 	
 	private void setupListeners()
 	{
+		nextButton.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent click)
+			{
+				if(currentCar.equals("jeep"))
+				{
+					currentCar = "mazda";
+					changeCar("mazda");
+				}
+				else
+				{
+					currentCar = "jeep";
+					changeCar("jeep");
+				}
+			}
+		});
+	}
+	
+	private void changeCar(String car)
+	{
+		if(car.equals("jeep"))
+		{
+			seatsLabel.setText("Number of seats: " + Integer.toString(baseController.getJeep().getNumberOfSeats()));
+			wheelsLabel.setText("The car has 4 wheels: " + Boolean.toString(baseController.getJeep().has4Wheels()));
+			colorLabel.setText("The car is: " + baseController.getJeep().getColor());
+		}
+		else if(car.equals("mazda"))
+		{
+			seatsLabel.setText("Number of seats: " + Integer.toString(baseController.getMazda().getNumberOfSeats()));
+			wheelsLabel.setText("The car has 4 wheels: " + Boolean.toString(baseController.getMazda().has4Wheels()));
+			colorLabel.setText("The car is: " + baseController.getMazda().getColor());
+		}
 	}
 }
