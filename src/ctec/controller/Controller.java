@@ -1,28 +1,30 @@
 package ctec.controller;
 
+import java.util.ArrayList;
+
 import ctec.model.*;
 import ctec.view.Frame;
 
 public class Controller
 {
-	private JeepWrangler jeep;
-	private MazdaRx8 mazda;
+	private ArrayList<Car> carList;
 	private Frame frame;
 	
 	public Controller()
 	{
-		jeep = new JeepWrangler();
-		mazda = new MazdaRx8();
+		setupCarList();
 		frame = new Frame(this);
 	}
 	
-	public JeepWrangler getJeep()
+	private void setupCarList()
 	{
-		return jeep;
+		carList = new ArrayList<Car>();
+		carList.add(new JeepWrangler());
+		carList.add(new MazdaRx8());
 	}
 	
-	public MazdaRx8 getMazda()
+	public ArrayList<Car> getCarList()
 	{
-		return mazda;
+		return carList;
 	}
 }

@@ -4,12 +4,15 @@ import javax.swing.*;
 
 import java.awt.Dimension;
 import java.awt.event.*;
+import java.util.ArrayList;
+
 import ctec.controller.Controller;
+import ctec.model.Car;
 
 public class Panel extends JPanel
 {
 	private Controller baseController;
-	private String currentCar;
+	private int currentCar;
 	
 	private SpringLayout baseLayout;
 	private JLabel seatsLabel;
@@ -21,7 +24,7 @@ public class Panel extends JPanel
 	public Panel(Controller baseController)
 	{
 		this.baseController = baseController;
-		currentCar = "mazda";
+		currentCar = 0;
 		baseLayout = new SpringLayout();
 		seatsLabel = new JLabel("Number of seats: ");
 		colorLabel = new JLabel("The car is: ");
@@ -65,35 +68,25 @@ public class Panel extends JPanel
 		{
 			public void actionPerformed(ActionEvent click)
 			{
-				if(currentCar.equals("jeep"))
-				{
-					currentCar = "mazda";
-					changeCar("mazda");
-				}
-				else
-				{
-					currentCar = "jeep";
-					changeCar("jeep");
-				}
+				changeCar();
 			}
 		});
 	}
 	
-	private void changeCar(String car)
+	private void changeCar()
 	{
-		if(car.equals("jeep"))
+		ArrayList<Car> carList = baseController.getCarList();
+		
+		if((currentCar + 1) > carList.size())
 		{
-			carType.setText("Jeep");
-			seatsLabel.setText("Number of seats: " + Integer.toString(baseController.getJeep().getNumberOfSeats()));
-			wheelsLabel.setText("The car has 4 wheels: " + Boolean.toString(baseController.getJeep().has4Wheels()));
-			colorLabel.setText("The car is: " + baseController.getJeep().getColor());
+			currentCar = 0;
 		}
-		else if(car.equals("mazda"))
-		{
-			carType.setText("Mazda");
-			seatsLabel.setText("Number of seats: " + Integer.toString(baseController.getMazda().getNumberOfSeats()));
-			wheelsLabel.setText("The car has 4 wheels: " + Boolean.toString(baseController.getMazda().has4Wheels()));
-			colorLabel.setText("The car is: " + baseController.getMazda().getColor());
-		}
+		
+		seatsLabel.setText("Number of seats: " + Integer.toString(carList.get(currentCar).getNumberOfSeats()));
+		colorLabel.setText("The car is: " + carList.get(currentCar).getColor());
+		wheelsLabel.setText("The car has 4 wheels: " + Boolean.toString(carList.get(currentCar).has4Wheels()));
+		carType.setText(carList.get(currentCar).getName());
+		
+		currentCar++;
 	}
 }

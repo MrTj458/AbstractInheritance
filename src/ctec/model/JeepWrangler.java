@@ -6,6 +6,7 @@ public class JeepWrangler extends Car
 {
 	public JeepWrangler()
 	{
+		this.setName("Jeep Wrangler");
 		this.setNumberOfSeats(5);
 		this.setHas4Wheels(true);
 		this.setColor("White");

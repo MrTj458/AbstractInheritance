@@ -4,9 +4,20 @@ import java.util.ArrayList;
 
 public abstract class Car implements Death
 {
+	private String name;
 	private int numberOfSeats;
 	private boolean has4Wheels;
 	private String color;
+
+	public String getName()
+	{
+		return name;
+	}
+
+	public void setName(String name)
+	{
+		this.name = name;
+	}
 
 	public int getNumberOfSeats()
 	{
