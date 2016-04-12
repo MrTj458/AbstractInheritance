@@ -19,7 +19,7 @@ public class Frame extends JFrame
 	private void setupFrame()
 	{
 		this.setContentPane(basePanel);
-		this.setSize(250,125);
+		this.setSize(510,510);
 		this.setTitle("Inheritance");
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setVisible(true);
