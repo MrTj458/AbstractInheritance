@@ -2,7 +2,7 @@ package ctec.model;
 
 import java.util.ArrayList;
 
-public abstract class Car implements Death
+public abstract class Car implements Death, Comparable<Death>
 {
 	private String name;
 	private int numberOfSeats;
@@ -47,5 +47,38 @@ public abstract class Car implements Death
 	public void setColor(String color)
 	{
 		this.color = color;
+	}
+
+	public String toString()
+	{
+		String carDescription = "This is a Car object of type " + this.getClass().getName() + "and is " + this.getColor();
+		
+		return carDescription;
+	}
+	
+	/**
+	 * If this object is before or less than the compared object return a negative number. (generally -1)
+	 * If this number is after/greater than the compared object return a positive number. (generally 1)
+	 * If it is the same return 0.
+	 * someCar.compareTo(otherCar);
+	 */
+	public int compareTo(Death compared)
+	{
+		int comparedValue;
+		
+		if(this.chanceOfDeath() < compared.chanceOfDeath())
+		{
+			comparedValue = -1;
+		}
+		else if(this.chanceOfDeath() > compared.chanceOfDeath())
+		{
+			comparedValue = 1;
+		}
+		else
+		{
+			comparedValue = 0;
+		}
+		
+		return comparedValue;
 	}
 }
