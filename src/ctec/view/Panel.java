@@ -8,30 +8,31 @@ import java.util.ArrayList;
 
 import ctec.controller.Controller;
 import ctec.model.Car;
+import ctec.model.Death;
 
 public class Panel extends JPanel
 {
 	private Controller baseController;
-	private int currentCar;
-	
+	private int currentObject;
+
 	private SpringLayout baseLayout;
 	private JTextArea textArea;
 	private JScrollPane textScrollPane;
 	private JButton nextButton;
-	
+
 	public Panel(Controller baseController)
 	{
 		this.baseController = baseController;
-		currentCar = 0;
+		currentObject = 0;
 		baseLayout = new SpringLayout();
 		nextButton = new JButton("Next Car");
-		
+
 		setupTextArea();
 		setupPanel();
 		setupLayout();
 		setupListeners();
 	}
-	
+
 	private void setupTextArea()
 	{
 		textArea = new JTextArea();
@@ -43,7 +44,7 @@ public class Panel extends JPanel
 		textScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		textScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 	}
-	
+
 	private void setupPanel()
 	{
 		this.setLayout(baseLayout);
@@ -51,7 +52,7 @@ public class Panel extends JPanel
 		this.add(nextButton);
 		this.add(textScrollPane);
 	}
-	
+
 	private void setupLayout()
 	{
 		baseLayout.putConstraint(SpringLayout.WEST, nextButton, 10, SpringLayout.WEST, this);
@@ -65,7 +66,7 @@ public class Panel extends JPanel
 		baseLayout.putConstraint(SpringLayout.SOUTH, textScrollPane, -6, SpringLayout.NORTH, nextButton);
 		baseLayout.putConstraint(SpringLayout.EAST, textScrollPane, -10, SpringLayout.EAST, this);
 	}
-	
+
 	private void setupListeners()
 	{
 		nextButton.addActionListener(new ActionListener()
@@ -76,22 +77,22 @@ public class Panel extends JPanel
 			}
 		});
 	}
-	
+
 	private void changeCar()
 	{
-		ArrayList<Car> carList = baseController.getCarList();
-		
-		if((currentCar + 1) > carList.size())
+		ArrayList<Death> deaths = baseController.getDeathList();
+
+		if ((currentObject + 1) > deaths.size())
 		{
-			currentCar = 0;
+			currentObject = 0;
 		}
-		
-		textArea.append(carList.get(currentCar).getName() + "\n");
-		textArea.append("The car is: " + carList.get(currentCar).getColor() + "\n");
-		textArea.append("Number of seats: " + Integer.toString(carList.get(currentCar).getNumberOfSeats()) + "\n");
-		textArea.append("The car has 4 wheels: " + Boolean.toString(carList.get(currentCar).has4Wheels()) + "\n");
-		
+
+		textArea.append(deaths.get(currentObject).getName() + "\n");
+		textArea.append("The car is: " + deaths.get(currentObject).getColor() + "\n");
+		textArea.append("Number of seats: " + Integer.toString(deaths.get(currentObject).getNumberOfSeats()) + "\n");
+		textArea.append("The car has 4 wheels: " + Boolean.toString(deaths.get(currentObject).has4Wheels()) + "\n");
+
 		textArea.append("\n");
-		currentCar++;
+		currentObject++;
 	}
 }

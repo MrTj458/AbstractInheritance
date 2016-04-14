@@ -7,4 +7,5 @@ public interface Death
 	public void memes();
 	public void spamTime(int spams);
 	public void punch(int times);
+	public int compareTo(Object thing);
 }

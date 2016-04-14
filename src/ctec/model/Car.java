@@ -2,7 +2,7 @@ package ctec.model;
 
 import java.util.ArrayList;
 
-public abstract class Car implements Death, Comparable<Death>
+public abstract class Car implements Death, Comparable
 {
 	private String name;
 	private int numberOfSeats;
@@ -62,23 +62,25 @@ public abstract class Car implements Death, Comparable<Death>
 	 * If it is the same return 0.
 	 * someCar.compareTo(otherCar);
 	 */
-	public int compareTo(Death compared)
+	public int compareTo(Object compared)
 	{
-		int comparedValue;
+		int comparedValue = Integer.MIN_VALUE;
 		
-		if(this.chanceOfDeath() < compared.chanceOfDeath())
+		if(compared instanceof Death)
 		{
-			comparedValue = -1;
+			if(this.chanceOfDeath() < ((Death) compared).chanceOfDeath())
+			{
+				comparedValue = -1;
+			}
+			else if(this.chanceOfDeath() > ((Death) compared).chanceOfDeath())
+			{
+				comparedValue = 1;
+			}
+			else
+			{
+				comparedValue = 0;
+			}
 		}
-		else if(this.chanceOfDeath() > compared.chanceOfDeath())
-		{
-			comparedValue = 1;
-		}
-		else
-		{
-			comparedValue = 0;
-		}
-		
 		return comparedValue;
 	}
 }
