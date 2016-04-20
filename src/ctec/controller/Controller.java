@@ -12,15 +12,28 @@ public class Controller
 	
 	public Controller()
 	{
-		setupCarList();
+		setupDeathList();
 		frame = new Frame(this);
 	}
 	
-	private void setupCarList()
+	private void setupDeathList()
 	{
 		deaths = new ArrayList<Death>();
 		deaths.add(new JeepWrangler());
 		deaths.add(new MazdaRx8());
+		deaths.add(new Emu());
+	}
+	
+	public String getDeathChances()
+	{
+		String deathLevels = "";
+		
+		for(Death currentDeath : deaths)
+		{
+			deathLevels += currentDeath.getClass().getName() + ": " + currentDeath.chanceOfDeath() + " \n";
+		}
+		
+		return deathLevels;
 	}
 	
 	private void swap(int firstLocation, int secondLocation)

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import ctec.controller.Controller;
 import ctec.model.Car;
 import ctec.model.Death;
+import java.awt.Color;
 
 public class Panel extends JPanel
 {
@@ -49,8 +50,10 @@ public class Panel extends JPanel
 	{
 		this.setLayout(baseLayout);
 		this.setPreferredSize(new Dimension(500, 500));
+		this.setBackground(Color.GRAY);
 		this.add(nextButton);
 		this.add(textScrollPane);
+		textArea.setText(baseController.getDeathChances());
 	}
 
 	private void setupLayout()
@@ -73,26 +76,10 @@ public class Panel extends JPanel
 		{
 			public void actionPerformed(ActionEvent click)
 			{
-				changeCar();
+				baseController.insertionSort();
+				
+				textArea.append("\n" + baseController.getDeathChances());
 			}
 		});
-	}
-
-	private void changeCar()
-	{
-		ArrayList<Death> deaths = baseController.getDeathList();
-
-		if ((currentObject + 1) > deaths.size())
-		{
-			currentObject = 0;
-		}
-
-		textArea.append(deaths.get(currentObject).getName() + "\n");
-		textArea.append("The car is: " + deaths.get(currentObject).getColor() + "\n");
-		textArea.append("Number of seats: " + Integer.toString(deaths.get(currentObject).getNumberOfSeats()) + "\n");
-		textArea.append("The car has 4 wheels: " + Boolean.toString(deaths.get(currentObject).has4Wheels()) + "\n");
-
-		textArea.append("\n");
-		currentObject++;
 	}
 }
